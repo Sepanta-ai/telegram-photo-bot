@@ -1,9 +1,7 @@
 import os
-import time
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
-# ===== Anti Sleep Web Server =====
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
 
@@ -19,21 +17,18 @@ def run_web():
 
 threading.Thread(target=run_web).start()
 
-# ===== Telegram Bot =====
 TOKEN = os.getenv("TOKEN")
 GROUP_CHAT_ID = int(os.getenv("GROUP_CHAT_ID"))
 
-# محدودیت اسپم
-user_last_photo = {}
-SPAM_DELAY = 30
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام 👋\nلطفا عکس همراه کپشن ارسال کنید.")
+    await update.message.reply_text("سلام 👋 عکس بفرست")
 
 async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-    user_id = update.message.from_user.id
-    now = time.time()
+    photo = update.message.photo[-1]
+    await context.bot.send_photo(
+        chat_id=GROUP_CHAT_ID,
+        photo=photo.file_id
+    )
 
 app = ApplicationBuilder().token(TOKEN).build()
 
