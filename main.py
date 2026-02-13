@@ -20,15 +20,9 @@ threading.Thread(target=run_web).start()
 TOKEN = os.getenv("TOKEN")
 GROUP_CHAT_ID = int(os.getenv("GROUP_CHAT_ID"))
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام 👋 عکس بفرست")
-
 async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    photo = update.message.photo[-1]
-    await context.bot.send_photo(
-        chat_id=GROUP_CHAT_ID,
-        photo=photo.file_id
-    )
+    # این دستور کل پیام شامل عکس و کپشن را عیناً فوروارد می‌کند
+    await update.message.forward(chat_id=GROUP_CHAT_ID)
 
 app = ApplicationBuilder().token(TOKEN).build()
 
