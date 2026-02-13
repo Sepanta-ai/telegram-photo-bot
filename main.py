@@ -31,7 +31,7 @@ GROUP_CHAT_ID = int(os.getenv("GROUP_CHAT_ID"))
 user_usage = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام لطفا عکس خود به همراه متن خواسته را ارسال کنید تا برای پشتیبانی ارسال شود")
+    await update.message.reply_text("سلام لطفا عکس خود به همراه متن خواسته شده را ارسال کنید تا برای پشتیبانی ارسال شود")
 
 async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.from_user.id
