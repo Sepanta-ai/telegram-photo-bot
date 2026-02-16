@@ -50,6 +50,8 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message:
         await update.message.forward(chat_id=GROUP_CHAT_ID)
         user_usage[user_id]["count"] += 1
+        
+        await update.message.reply_text("✅ با موفقیت دریافت و برای پشتیبانی ارسال شد")
 
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
